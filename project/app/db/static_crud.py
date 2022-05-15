@@ -34,4 +34,9 @@ class StaticCRUD():
 
         return await database.fetch_all(query)
 
+    async def reset_statics(self):
+        query = statics.delete()
+
+        return await database.execute(query)
+
 static_crud = StaticCRUD()

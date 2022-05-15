@@ -5,13 +5,13 @@ from pydantic import BaseModel, validator
 
 class StaticBase(BaseModel):
     date: datetime.date = datetime.date.today()
-    views: int = None
-    clicks: int = None
-    cost: Decimal = None
+    views: int = 1
+    clicks: int = 1
+    cost: Decimal = 1
 
     @classmethod
     def check_value(cls, views):
-        if views < 0:
+        if views <= 0:
             raise ValueError("views, clicks or cost negative!")
         return views
 

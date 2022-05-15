@@ -11,8 +11,8 @@ class StaticCRUD():
             clicks = static.clicks, cost = static.cost, cpc = static.cpc, cpm = static.cpm)
         return await database.execute(query)
 
-    async def get_statics(self, criteria: CriteriaStatic):
-        if criteria.name_column_sorted == "":
+    async def get_statics(self, criteria: CriteriaStatic) -> list[StaticDB]:
+        if criteria.name_column_sorted == " ":
             if criteria.sorting_from_last == True:
                 query = statics.select().where((statics.c.date >= criteria.from_date),
                     (statics.c.date <= criteria.to_date)).order_by(sqlalchemy.desc(statics.c.date))
@@ -31,7 +31,6 @@ class StaticCRUD():
                             FROM statics
                             WHERE '{criteria.from_date}' <= statics.date AND statics.date <= '{criteria.to_date}'
                             ORDER BY statics.date, statics.{criteria.name_column_sorted}'''
-
         return await database.fetch_all(query)
 
     async def reset_statics(self):

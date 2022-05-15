@@ -1,5 +1,6 @@
 import datetime
 from decimal import Decimal
+from enum import Enum
 from pydantic import BaseModel, validator
 
 
@@ -34,12 +35,12 @@ class Static(StaticBase):
 class CriteriaStatic(BaseModel):
     from_date: datetime.date
     to_date: datetime.date
-    name_column_sorted: str = ""
+    name_column_sorted: str = " "
     sorting_from_last: bool = True
 
     @validator("name_column_sorted")
     def check_name_column(cls, name_column):
-        if name_column not in ["views", "clicks", "cost", "cpc", "cpm", ""]:
+        if name_column not in ["views", "clicks", "cost", "cpc", "cpm", " "]:
             raise ValueError("A nonexistent column is specified for sorting")
         return name_column
 
@@ -47,3 +48,11 @@ class CriteriaStatic(BaseModel):
 class StaticDB(StaticBase):
     cpc: Decimal
     cpm: Decimal
+
+class ColumnSorted(Enum):
+    views = "views"
+    clicks = "clicks"
+    cost = "cost" 
+    cpc = "cpc"
+    cpm = "cpm"
+    Nothing = " "

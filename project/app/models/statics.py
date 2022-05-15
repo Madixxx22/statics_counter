@@ -9,5 +9,8 @@ statics = sqlalchemy.Table(
     sqlalchemy.Column("date", sqlalchemy.Date()),
     sqlalchemy.Column("views", sqlalchemy.Integer()),
     sqlalchemy.Column("clicks", sqlalchemy.Integer()),
-    sqlalchemy.Column("cost", sqlalchemy.Numeric())
+    sqlalchemy.Column("cost", sqlalchemy.Numeric()),
+    sqlalchemy.Column("cpc", sqlalchemy.Numeric()),
+    sqlalchemy.Column("cpm", sqlalchemy.Numeric()),
+    
     )
